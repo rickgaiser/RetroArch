@@ -156,7 +156,7 @@ static void frontend_ps2_init(void *data)
    int bootDeviceID;
 
    SifInitRpc(0);
-#if !defined(DEBUG)
+#if !defined(DEBUG) || defined(BUILD_FOR_PCSX2)
    /* Comment this line if you don't wanna debug the output */
    while(!SifIopReset(NULL, 0)){};
 #endif
