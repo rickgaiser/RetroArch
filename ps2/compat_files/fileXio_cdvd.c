@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <tamtypes.h>
 #include <kernel.h>
 #include <string.h>
@@ -8,6 +9,8 @@
 #include <cdvd_rpc.h>
 #include <fileXio_cdvd.h>
 #include <libcdvd-common.h>
+#include <ps2sdkapi.h>
+
 #include "ps2_devices.h"
 #include "ps2_descriptor.h"
 
@@ -46,7 +49,7 @@ static int ps2_cdDiscValid(void)  //returns 1 if disc valid, else returns 0
 
 static u64 cd_Timer(void)
 {
-   return (clock() / (CLOCKS_PER_SEC / 1000));
+   return ps2_clock() / PS2_CLOCKS_PER_MSEC;
 }
 
 static void ps2_cdStop(void)
