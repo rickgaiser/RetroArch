@@ -24,7 +24,7 @@
 #include "../../libretro-common/include/libretro_gskit_ps2.h"
 
 #define GS_TEXT GS_SETREG_RGBAQ(0x80,0x80,0x80,0x80,0x00) // turn white GS Screen
-#define GS_BLACK GS_SETREG_RGBAQ(0x00,0x00,0x00,0x00,0x00) // turn white GS Screen
+#define GS_BLACK GS_SETREG_RGBAQ(0x00,0x00,0x00,0x80,0x00) // turn white GS Screen
 
 #define NTSC_WIDTH 640
 #define NTSC_HEIGHT 448
@@ -87,7 +87,7 @@ static void init_ps2_video(ps2_video_t *ps2)
 {
    ps2->gsGlobal = init_GSGlobal();
    gsKit_TexManager_init(ps2->gsGlobal);
-   
+
    ps2->menuTexture = prepare_new_texture();
    ps2->coreTexture = prepare_new_texture();
 
@@ -211,19 +211,15 @@ static bool ps2_gfx_frame(void *data, const void *frame,
    }
 #endif
 
-   gsKit_clear(ps2->gsGlobal, GS_BLACK);
-
    if (frame) {
-      bool sendPalette = false;
       struct retro_hw_ps2_insets padding = empty_ps2_insets;
       if (frame != RETRO_HW_FRAME_BUFFER_VALID){ /* Checking if the transfer is done in the core */
          /* calculate proper width based in the pitch */
          int bytes_per_pixel = (ps2->PSM == GS_PSM_CT32) ? 4 : 2;
-         int real_width = pitch / bytes_per_pixel; 
+         int real_width = pitch / bytes_per_pixel;
          set_texture(ps2->coreTexture, frame, real_width, height, ps2->PSM, ps2->core_filter, 1);
          padding.right = real_width - width;
       } else {
-         sendPalette = ps2->iface.updatedPalette;
          ps2->iface.updatedPalette = false;
          padding = ps2->iface.padding;
          if (ps2->iface.clearTexture) {
@@ -338,7 +334,6 @@ static void ps2_set_texture_frame(void *data, const void *frame, bool rgb32,
 
    bool color_correction = false;
    int PSM = (rgb32 ? GS_PSM_CT32 : GS_PSM_CT16);
-   bool texture_changed = texture_need_prepare(ps2->menuTexture, width, height, PSM);
 
    set_texture(ps2->menuTexture, frame, width, height, PSM, ps2->menu_filter, color_correction);
    gsKit_TexManager_invalidate(ps2->gsGlobal, ps2->menuTexture);
