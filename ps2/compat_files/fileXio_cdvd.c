@@ -177,7 +177,7 @@ int ps2fileXioDopen(const char *name)
    if (deviceID == BOOT_DEVICE_CDFS) {
       fd = fileXioCDDopen(name);
    } else {
-      fd = fileXioDopen(name);
+      fd = opendir(name);
    }
 
    return fd;
