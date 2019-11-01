@@ -82,11 +82,6 @@
 #include <pspkernel.h>
 #endif
 
-#if defined(PS2)
-#include <fileXio_rpc.h>
-#include <fileXio.h>
-#endif
-
 #if defined(__CELLOS_LV2__)
 #include <cell/cell_fs.h>
 #endif
@@ -119,7 +114,7 @@ static retro_vfs_mkdir_t path_mkdir_cb = retro_vfs_mkdir_impl;
 
 void path_vfs_init(const struct retro_vfs_interface_info* vfs_info)
 {
-   const struct retro_vfs_interface* 
+   const struct retro_vfs_interface*
       vfs_iface           = vfs_info->iface;
 
    path_stat_cb           = retro_vfs_stat_impl;
@@ -186,7 +181,7 @@ bool path_mkdir(const char *dir)
    if (!(dir && *dir))
       return false;
 
-   /* Use heap. Real chance of stack 
+   /* Use heap. Real chance of stack
     * overflow if we recurse too hard. */
    basedir            = strdup(dir);
 
@@ -673,7 +668,7 @@ void path_parent_dir(char *path)
 
    if (!path)
       return;
-   
+
    len = strlen(path);
 
    if (len && path_char_is_slash(path[len - 1]))
@@ -1287,7 +1282,7 @@ void fill_pathname_application_path(char *s, size_t len)
       CFStringGetCString(bundle_path, s, len, kCFStringEncodingUTF8);
 #ifdef HAVE_COCOATOUCH
       {
-         /* This needs to be done so that the path becomes 
+         /* This needs to be done so that the path becomes
           * /private/var/... and this
           * is used consistently throughout for the iOS bundle path */
          char resolved_bundle_dir_buf[PATH_MAX_LENGTH] = {0};
@@ -1302,7 +1297,7 @@ void fill_pathname_application_path(char *s, size_t len)
       CFRelease(bundle_path);
       CFRelease(bundle_url);
 #ifndef HAVE_COCOATOUCH
-      /* Not sure what this does but it breaks 
+      /* Not sure what this does but it breaks
        * stuff for iOS, so skipping */
       retro_assert(strlcat(s, "nobin", len) < len);
 #endif

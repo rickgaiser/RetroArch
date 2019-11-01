@@ -17,6 +17,7 @@
 #include <stdio.h>
 #include <kernel.h>
 #include <string.h>
+#define NEWLIB_PORT_AWARE
 #include <fileXio_rpc.h>
 
 #define DEVICE_SLASH "/"
@@ -182,6 +183,6 @@ bool waitUntilDeviceIsReady(enum BootDeviceIDs device_id)
    if (openFile > 0) {
       fileXioDclose(openFile);
    }
-   
+
    return openFile >= 0;
 }

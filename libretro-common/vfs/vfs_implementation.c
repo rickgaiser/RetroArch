@@ -52,6 +52,7 @@
 #    include <pspiofilemgr.h>
 #  endif
 #  if defined(PS2)
+#    define NEWLIB_PORT_AWARE
 #    include <fileXio_rpc.h>
 #    include <fileXio_cdvd.h>
 #  endif
@@ -94,6 +95,7 @@
 #    include <pspiofilemgr.h>
 #  endif
 #  if defined(PS2)
+#    define NEWLIB_PORT_AWARE
 #    include <fileXio_rpc.h>
 #  endif
 #  include <sys/types.h>
@@ -147,6 +149,7 @@
 #endif
 
 #if defined(PS2)
+#define NEWLIB_PORT_AWARE
 #include <fileXio_rpc.h>
 #include <fileXio.h>
 #endif

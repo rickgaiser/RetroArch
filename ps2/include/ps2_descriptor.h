@@ -16,7 +16,6 @@
 #define PS2_DESCRIPTOR_H
 
 #include <stddef.h>
-#include <fileXio_cdvd.h>
 
 #define MAX_OPEN_FILES 256
 #define FILEENTRY_SIZE 2048
