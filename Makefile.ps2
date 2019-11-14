@@ -33,6 +33,7 @@ endif
 INCDIR = -I$(PS2DEV)/gsKit/include -I$(PS2SDK)/ports/include -I$(CDVD_DIR)/ee
 INCDIR += -Ips2 -Ips2/include -Ilibretro-common/include -Ideps -Ideps/stb -Ideps/7zip
 INCDIR += -Ideps/pthreads -Ideps/pthreads/platform/ps2 -Ideps/pthreads/platform/helper
+GPVAL = -G0
 CFLAGS = $(OPTIMIZE_LV) $(DISABLE_WARNINGS) -ffast-math -fsingle-precision-constant
 ASFLAGS = $(CFLAGS)
 
@@ -87,6 +88,7 @@ EE_LIBS = $(LIBS)
 EE_ASFLAGS = $(ASFLAGS)
 EE_INCS = $(INCDIR)
 EE_BIN = $(TARGET)
+EE_GPVAL = $(GPVAL)
 
 
 all: irxdir $(EE_BIN)
