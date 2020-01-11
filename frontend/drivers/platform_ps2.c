@@ -44,7 +44,9 @@ static void create_path_names(void)
    char cwd[FILENAME_MAX];
    int bootDeviceID;
 
-   getcwd(cwd, sizeof(cwd));
+   //getcwd(cwd, sizeof(cwd));
+   // getcwd does not work, cwd hardcoded!
+   snprintf(cwd, FILENAME_MAX, "mass:");
    bootDeviceID=getBootDeviceID(cwd);
    strlcpy(cwd, rootDevicePath(bootDeviceID), sizeof(cwd));
    strcat(cwd, "RETROARCH");
@@ -156,13 +158,6 @@ static void frontend_ps2_init(void *data)
    int bootDeviceID;
 
    SifInitRpc(0);
-#if !defined(DEBUG) || defined(BUILD_FOR_PCSX2)
-   /* Comment this line if you don't wanna debug the output */
-   while(!SifIopReset(NULL, 0)){};
-#endif
-
-   while(!SifIopSync()){};
-   SifInitRpc(0);
    sbv_patch_enable_lmb();
 
    /* I/O Files */
@@ -220,7 +215,9 @@ static void frontend_ps2_init(void *data)
    // _init_ps2_io();
 
    /* Prepare device */
-   getcwd(cwd, sizeof(cwd));
+   //getcwd(cwd, sizeof(cwd));
+   // getcwd does not work, cwd hardcoded!
+   snprintf(cwd, FILENAME_MAX, "mass:");
    bootDeviceID=getBootDeviceID(cwd);
    waitUntilDeviceIsReady(bootDeviceID);
 

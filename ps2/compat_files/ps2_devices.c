@@ -166,7 +166,7 @@ bool waitUntilDeviceIsReady(enum BootDeviceIDs device_id)
    int retries = 3; /* just in case we tried a unit that is not working/connected */
    char *rootDevice = rootDevicePath(device_id);
 
-   while(dir == NULL && retries > 0)
+//   while(dir == NULL && retries > 0)
    {
       dir = opendir(rootDevice);
       /* Wait untill the device is ready */
