@@ -136,13 +136,13 @@ static void prim_texture(GSGLOBAL *gsGlobal, GSTEXTURE *texture, int zPosition, 
    }
 
    gsKit_prim_sprite_texture( gsGlobal, texture,
-                              x1, //X1
-                              y1,  // Y1
-                              padding.left,  // U1
+                              x1 - 0.5f, //X1
+                              y1 - 0.5f, // Y1
+                              padding.left, // U1
                               padding.top,  // V1
-                              x2, // X2
-                              y2, // Y2
-                              texture->Width - padding.right, // U2
+                              x2 - 0.5f, // X2
+                              y2 - 0.5f, // Y2
+                              texture->Width - padding.right,   // U2
                               texture->Height - padding.bottom, // V2
                               zPosition,
                               GS_TEXT);
