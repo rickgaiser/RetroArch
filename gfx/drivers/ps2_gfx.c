@@ -53,7 +53,7 @@ static GSGLOBAL *init_GSGlobal(void)
    gsGlobal->Mode = GS_MODE_NTSC;
    gsGlobal->Interlace = GS_NONINTERLACED;
    gsGlobal->Field = GS_FRAME;
-   gsGlobal->Width = 320;
+   gsGlobal->Width = 640;
    gsGlobal->Height = 240;
 
    gsGlobal->PSM = GS_PSM_CT16;
